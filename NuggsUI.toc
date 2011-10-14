@@ -6,5 +6,6 @@
 ## RequiredDeps: Tukui
 
 locales\english.lua
+modules\mail\openmail.lua
 modules\tooltip\talents.lua
 NuggsUI.lua
