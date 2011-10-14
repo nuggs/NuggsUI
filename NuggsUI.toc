@@ -1,0 +1,10 @@
+## Interface: 40200
+## Title: |cffC495DDNuggsUI|r
+## Notes: Changes to the Tukui interface.
+## Author: Nuggs
+## Version: 0.0.1
+## RequiredDeps: Tukui
+
+locales\english.lua
+modules\tooltip\talents.lua
+NuggsUI.lua
