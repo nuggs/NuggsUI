@@ -1,4 +1,4 @@
-local T, C, L = unpack(Tukui)
+local T, C, L = unpack(Tukui);
 
 ----------------------------------------------------------------------------------------
 -- Grab mail in 1 button(OpenAll by Kemayo)
@@ -50,7 +50,7 @@ function openMail(index)
 		t = 0
 		button:SetScript("OnUpdate", waitForMail)
 	else
-		stopOpening("|cffffff00"..L_MAIL_COMPLETE)
+		stopOpening("|cffffff00"..L_MAIL_COMPLETE..(not takingOnlyCash "collecting " .. copper_to_pretty_money(total_cash) or ""))
 		MiniMapMailFrame:Hide()
 		TukuiMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
 	end
