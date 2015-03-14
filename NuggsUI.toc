@@ -1,15 +1,16 @@
-## Interface: 50300
+## Interface: 60100
 ## Title: |cffC495DDNuggsUI|r
 ## Notes: Changes to the Tukui interface.
 ## Author: Nuggs
-## Version: 0.1.9
+## Version: 0.2.4
 ## RequiredDeps: Tukui
-## OptionalDeps: InterGuildLink
+## OptionalDeps: 
+## SavedVariables: rNP_SPELL_DB
 
 locales\english.lua
 config\config.lua
-modules\chat\sounds.lua
-modules\datatext\igl-guild.lua
+core\functions.lua
+modules\chat\chat.lua
 modules\nameplates\nameplates.lua
 modules\mail\openmail.lua
 modules\misc\stagger.lua

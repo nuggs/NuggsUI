@@ -2,7 +2,7 @@
 --	Target Talents(TipTacTalents by Aezay)
 ----------------------------------------------------------------------------------------
 local T, C, L = unpack(Tukui)
-
+--[[
 if( C["tooltip"]["enable"] ~= true ) then return end
 
 local TALENTS_PREFIX = TALENTS .. ":|cffffffff "
@@ -132,3 +132,4 @@ GameTooltip:HookScript( "OnTooltipSetUnit", function( self, ... )
 		end
 	end
 end )
+]]--
