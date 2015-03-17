@@ -1,0 +1,5 @@
+This is a list of known issues or incomplete features
+-------------------------------------------------------------------------------
+Sixth actionbar doesn't get hidden when hiding right actionbar
+Pet actionbar needs to be moved when chat background is enabled(over right chat window)
+nGarrison DataText appears to build up memory each time you hover over it.  Also happens default Garrison DataText

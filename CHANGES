@@ -1,0 +1,14 @@
+03/17/2015 - TT
+ * Removed a bunch of unused files
+ * Cleaned up folder and file names
+ * Moved toast window to upper left corner
+ * Added sixth actionbar next to ActionBar5
+ * Moved pet actionbar next to actionbar 6 with no chat background
+ * Added keybinds for sixth actionbar to the keybinds options menu under the NuggsUI category
+ * Added new Garrisons DataText to add some formatting, color, include currency and completed missions
+ * Added keybind swapping of tab when entering BGs or arenas to target nearest enemy player and then back to normal when exiting
+ * Updated the way friendly nameplates enable when entering arenas and BGs
+ * OpenMail:
+   * Removed call to change minimap border color
+   * Changed some locales
+   * Display total amount of gold collected in chat window when taking cash

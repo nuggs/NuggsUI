@@ -1,0 +1,14 @@
+<Bindings>
+  <Binding name="NUGGSUIBUTTON1" header="NUGGSUI" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON2" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON3" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON4" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON5" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON6" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON7" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON8" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON9" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON10" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON11" category="NuggsUI " />
+  <Binding name="NUGGSUIBUTTON12" category="NuggsUI " />
+</Bindings>
