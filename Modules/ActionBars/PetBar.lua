@@ -38,8 +38,10 @@ hooksecurefunc(TukuiActionBars, "CreatePetBar", function()
         end
 
         if (C.Chat.Background) then
+            PetPanel:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
+            PetPanel:SetPoint("BOTTOM", Panels.RightChatBG, "TOP", 0, 16)
             if (i == 1) then
-                Button:SetPoint("TOPLEFT", UIParent, Spacing, 0)
+                Button:SetPoint("TOPLEFT", PetPanel, Spacing, -Spacing)
             else
                 Button:SetPoint("LEFT", _G["PetActionButton"..(i - 1)], "RIGHT", Spacing, 0)
             end

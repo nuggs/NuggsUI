@@ -54,3 +54,11 @@ end
 NuggsUI_Worker:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end);
 NuggsUI_Worker:RegisterEvent("PLAYER_LOGIN");
 NuggsUI_Worker:RegisterEvent("PLAYER_ENTERING_WORLD");
+
+--[[ Implement later, mayhaps
+local Tooltip = T["Tooltips"]
+hooksecurefunc(Tooltip, "CreateAnchor", function()
+	Tooltip.Anchor:ClearAllPoints()
+	Tooltip.Anchor:SetPoint("BOTTOMRIGHT", RightChatBG, -5, 125)
+end)
+]]--
