@@ -1,4 +1,4 @@
-local T, C, L = unpack(Tukui);
+local T, C, L = Tukui:unpack()
 
 ----------------------------------------------------------------------------------------
 -- Grab mail in 1 button(OpenAll by Kemayo)
@@ -7,14 +7,24 @@ local COPPER_ICON = "|TInterface\\MONEYFRAME\\UI-CopperIcon:0:0:0:-1|t"
 local SILVER_ICON = "|TInterface\\MONEYFRAME\\UI-SilverIcon:0:0:0:-1|t"
 local GOLD_ICON = "|TInterface\\MONEYFRAME\\UI-GoldIcon:0:0:0:-1|t"
 local L_MAIL_STOPPED = ERR_INV_FULL
-local L_MAIL_COMPLETE = DONE
-local L_MAIL_NEED = L.mail_need
-local L_MAIL_MESSAGES = L.mail_messages
+local L_MAIL_COMPLETE = L.mail_COMPLETE
+local L_MAIL_NEED = L.mail_NEED
+local L_MAIL_MESSAGES = L.mail_MESSAGES
 local deletedelay, t = 0.5, 0
 local takingOnlyCash = false
 local button, button2, waitForMail, openAll, openAllCash, openMail, lastopened, stopOpening, onEvent, needsToWait, copper_to_pretty_money, total_cash
 local _G = _G
 local baseInboxFrame_OnClick
+
+function copper_to_pretty_money(c)
+	if c > 10000 then
+		return ("%d|cffffd700"..GOLD_ICON.."|r %d|cffc7c7cf"..SILVER_ICON.."|r %d|cffeda55f"..COPPER_ICON.."|r"):format(c/10000, (c/100)%100, c%100)
+	elseif c > 100 then
+		return ("%d|cffc7c7cf"..SILVER_ICON.."|r %d|cffeda55f"..COPPER_ICON.."|r"):format((c/100)%100, c%100)
+	else
+		return ("%d|cffeda55f"..COPPER_ICON.."|r"):format(c%100)
+	end
+end
 
 function openAll()
 	if GetInboxNumItems() == 0 then return end
@@ -32,13 +42,14 @@ function openAllCash()
 end
 
 function openMail(index)
+    local total_amount
 	if not InboxFrame:IsVisible() then return stopOpening("|cffffff00"..L_MAIL_NEED) end
 	if index == 0 then MiniMapMailFrame:Hide() stopOpening("|cffffff00"..L_MAIL_COMPLETE) return end
 	local _, _, _, _, money, COD, _, numItems = GetInboxHeaderInfo(index)
 	if money > 0 then
 		TakeInboxMoney(index)
 		needsToWait = true
-		if total_cash then total_cash = total_cash - money end
+		if total_cash then total_amount = total_cash; total_cash = total_cash - money end
 	elseif (not takingOnlyCash) and numItems and (numItems > 0) and COD <= 0 then
 		TakeInboxItem(index)
 		needsToWait = true
@@ -50,9 +61,11 @@ function openMail(index)
 		t = 0
 		button:SetScript("OnUpdate", waitForMail)
 	else
-		stopOpening("|cffffff00"..L_MAIL_COMPLETE..(not takingOnlyCash "collecting " .. copper_to_pretty_money(total_cash) or ""))
+        if (not takingOnlyCash) then stopOpening("|cffffff00"..L_MAIL_COMPLETE)
+        else stopOpening("|cffffff00"..L_MAIL_COMPLETE.." collecting "..copper_to_pretty_money(total_amount)) end
 		MiniMapMailFrame:Hide()
-		TukuiMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
+        -- May have to re-implement border color changing when having mail
+		-- TukuiMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
 	end
 end
 
@@ -100,10 +113,10 @@ local function makeButton(id, text, w, h, x, y)
 	return button
 end
 
-button = makeButton("TakeAll_Button", ALL, 55, 25, -55, -408)
+button = makeButton("TakeAll_Button", ALL, 55, 25, -69, -408)
 button:SetScript("OnClick", openAll)
 button:SetScript("OnEvent", onEvent)
-button2 = makeButton("TakeCash_Button", GUILDCONTROL_OPTION16, 85, 25, 18, -408)
+button2 = makeButton("TakeCash_Button", GUILDCONTROL_OPTION16, 85, 25, 2, -408)
 button2:SetScript("OnClick", openAllCash)
 
 -- Skin the buttons
@@ -116,16 +129,6 @@ button:SetScript("OnEnter", function()
 	GameTooltip:Show()
 end)
 button:SetScript("OnLeave", function() GameTooltip:Hide() end)
-
-function copper_to_pretty_money(c)
-	if c > 10000 then
-		return ("%d|cffffd700"..GOLD_ICON.."|r %d|cffc7c7cf"..SILVER_ICON.."|r %d|cffeda55f"..COPPER_ICON.."|r"):format(c/10000, (c/100)%100, c%100)
-	elseif c > 100 then
-		return ("%d|cffc7c7cf"..SILVER_ICON.."|r %d|cffeda55f"..COPPER_ICON.."|r"):format((c/100)%100, c%100)
-	else
-		return ("%d|cffeda55f"..COPPER_ICON.."|r"):format(c%100)
-	end
-end
 
 button2:SetScript("OnEnter", function()
 	if not total_cash then

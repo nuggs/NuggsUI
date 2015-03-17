@@ -5,16 +5,16 @@
 ## Version: 0.2.4
 ## RequiredDeps: Tukui
 ## OptionalDeps: 
-## SavedVariables: rNP_SPELL_DB
+## SavedVariables:
 
-locales\english.lua
-config\config.lua
-core\functions.lua
-modules\chat\chat.lua
-modules\nameplates\nameplates.lua
-modules\mail\openmail.lua
-modules\misc\stagger.lua
-modules\tooltip\talents.lua
-modules\skins\Skada.lua
-modules\skins\TinyDPS.lua
+locales\en-US.lua
+Config\Config.lua
+Core\Functions.lua
+Modules\ActionBars\Bar6.lua
+Modules\ActionBars\PetBar.lua
+Modules\Chat\Chat.lua
+Modules\DataText\nGarrison.lua
+Modules\Nameplates\Nameplates.lua
+Modules\Mail\OpenMail.lua
+Modules\Misc\Stagger.lua
 NuggsUI.lua

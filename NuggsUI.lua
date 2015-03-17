@@ -6,6 +6,11 @@ local NuggsUI_Worker = CreateFrame("Frame");
 function NuggsUI_Worker:PLAYER_LOGIN()
 	NuggsUI_Worker:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
 	NuggsUI_Worker:UnregisterEvent("PLAYER_LOGIN");
+    if (IsAddOnLoaded("Tukui_Datatext")) then
+        local UnitFrames = T.UnitFrames
+        local Pet = UnitFrames.Units.Pet
+        Pet:SetPoint("BOTTOM", UnitFrames.Anchor, "TOP", 0, 83)
+    end
 end
 
 -- Change tab keybinding when entering a PvP zone
