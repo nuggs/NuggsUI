@@ -1,5 +1,8 @@
 local T, C, L = Tukui:unpack()
 
+-- Move this stuff to proper files, Could probably go in a PvP module or something.
+-- Maybe not.  shaman addon, you cannot outrun the wind, blablblblbl when windfury procs
+
 -- Some basic things I want from my UI.
 local NuggsUI_Worker = CreateFrame("Frame");
 
@@ -13,12 +16,18 @@ function NuggsUI_Worker:PLAYER_LOGIN()
     end
 end
 
--- Change tab keybinding when entering a PvP zone
+-- Change some settings when entering BGs or arenas
 function NuggsUI_Worker:PLAYER_ENTERING_WORLD(...)
 	if (NuggsUI_IsPvP() == 1) then
-		SetBinding("TAB","TARGETNEARESTENEMYPLAYER");
-		SetBinding("SHIFT-TAB","TARGETNEARESTENEMY");
+        if (ObjectiveTrackerFrame:IsVisible() or ObjectiveTrackerFrame:IsShown()) then
+            ObjectiveTrackerFrame:Hide();
+        end
+        SetBinding("TAB","TARGETNEARESTENEMYPLAYER");
+        SetBinding("SHIFT-TAB","TARGETNEARESTENEMY");
 	else
+        if (not ObjectiveTrackerFrame:IsVisible() or not ObjectiveTrackerFrame:IsShown()) then
+            ObjectiveTrackerFrame:Show();
+        end
 		SetBinding("TAB","TARGETNEARESTENEMY");
 		SetBinding("SHIFT-TAB","TARGETNEARESTENEMYPLAYER");
 	end

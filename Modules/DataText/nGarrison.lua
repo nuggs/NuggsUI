@@ -1,5 +1,7 @@
 local T, C, L = Tukui:unpack()
 
+local format = format
+local match = match
 local gsub = gsub
 
 local DataText = T["DataTexts"]
@@ -11,12 +13,6 @@ local NumComplete = nil
 
 local Update = function(self, event)
 	GarrisonMissionList_UpdateMissions()
-
-    local _, amount = GetCurrencyInfo(824);
-    currentAmount = amount
-
-    local MissionsComplete = C_Garrison.GetCompleteMissions()
-    NumComplete = #MissionsComplete
 
 	local Missions = GarrisonMissionFrame.MissionTab.MissionList.inProgressMissions
 	local Count = 0
@@ -50,15 +46,17 @@ local OnEnter = function(self)
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 
-	local Missions = GarrisonMissionFrame.MissionTab.MissionList.inProgressMissions
-	local NumMissions = #Missions
+    local _, amount = GetCurrencyInfo(824);
 
     -- If you want the resource icon, you can add this line back in and remove the one below it...
     -- I thought I would like it more than I did.
 	-- GameTooltip:AddLine("|TInterface\\Icons\\inv_garrison_resource:0:0:0:0|t "..RESOURCES)
     GameTooltip:AddLine(RESOURCES)
-    GameTooltip:AddDoubleLine(CURRENT, currentAmount, 1, 1, 1, 0, .5, .7)
+    GameTooltip:AddDoubleLine(CURRENT, amount, 1, 1, 1, 0, .5, .7)
     GameTooltip:AddLine(" ")
+
+	local Missions = GarrisonMissionFrame.MissionTab.MissionList.inProgressMissions
+	local NumMissions = #Missions
 
 	C_Garrison.GetInProgressMissions(Missions)
 	
@@ -77,9 +75,11 @@ local OnEnter = function(self)
 		end
 	end
 
-    if (NumComplete > 0) then
+    local MissionsComplete = C_Garrison.GetCompleteMissions()
+
+    if (#MissionsComplete > 0) then
 		GameTooltip:AddLine(" ")
-        GameTooltip:AddDoubleLine(COMPLETE, NumComplete, 1, .82, 0, 0, .5, .7)
+        GameTooltip:AddDoubleLine(COMPLETE, #MissionsComplete, 1, .82, 0, 0, .5, .7)
     end
 
 	local Available = GarrisonMissionFrame.MissionTab.MissionList.availableMissions
