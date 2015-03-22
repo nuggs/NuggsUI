@@ -23,9 +23,9 @@ local Update = function(self, event)
     currentAmount = amount
 
     if not showIcon then
-        self.Text:SetText("Honor: "..currentAmount)
+        self.Text:SetFormattedText("%sHonor: %s%d|r", DataText.NameColor, DataText.ValueColor, currentAmount)
     else
-        self.Text:SetText("|T"..HonorIcon..":0|t "..currentAmount)
+        self.Text:SetFormattedText("|T"..HonorIcon..":0|t %s%d|r", DataText.ValueColor, currentAmount)
     end
 end
 

@@ -24,9 +24,9 @@ local Update = function(self, event)
     weeklyMax = weekly
 
     if not showIcon then
-        self.Text:SetText("CQ: "..currentAmount.."/"..weeklyMax)
+        self.Text:SetFormattedText("%sCQ: %s%d%s/%s%d|r", DataText.NameColor, DataText.ValueColor, currentAmount, DataText.NameColor, DataText.ValueColor, weeklyMax)
     else
-        self.Text:SetText("|T"..ConquestIcon..":0|t "..currentAmount.."/"..weeklyMax)
+        self.Text:SetFormattedText("|T"..ConquestIcon..":0|t %s%d%s/%s%d|r", DataText.ValueColor, currentAmount, DataText.NameColor, DataText.ValueColor, weeklyMax)
     end
 end
 

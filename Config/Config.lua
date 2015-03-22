@@ -1,4 +1,4 @@
-local T, C, L, G = Tukui:unpack()
+local T, C, L = Tukui:unpack()
 
 -- Set up default colors
 C.General.BorderColor = {0, .5, .7}

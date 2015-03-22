@@ -7,7 +7,7 @@ hooksecurefunc(TukuiUnitFrames, "Player", function(Player)
 		Player.Portrait:Size(250, 25)
 		Player.Portrait.Backdrop:SetBackdrop(nil)
 		Player.Portrait:SetAlpha(.3)
-		
+
 		Player.Health:ClearAllPoints()
 		Player.Health:SetPoint("TOPLEFT", 0, 0)
 		Player.Health:SetPoint("TOPRIGHT")
