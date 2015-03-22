@@ -1,4 +1,11 @@
 local T, C, L = Tukui:unpack()
+-------------------------------------------------------------------------------
+-- Enable a sixth actionbar, I needed it to have something to bind my naga
+-- to except I already had all the blizzard actionbars bound...  Probably a
+-- better way to do this...
+--
+-- Basically a hacked up ExtraBar by Cowmonster.
+-------------------------------------------------------------------------------
 local _G = _G
 
 local TukuiActionBars = T["ActionBars"];

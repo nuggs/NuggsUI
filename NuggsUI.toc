@@ -20,4 +20,7 @@ Modules\DataText\PvPQueue.lua
 Modules\Nameplates\Nameplates.lua
 Modules\Mail\OpenMail.lua
 Modules\Misc\Stagger.lua
+Modules\UnitFrames\Arena.lua
+Modules\UnitFrames\Raid.lua
+Modules\UnitFrames\Units.lua
 NuggsUI.lua

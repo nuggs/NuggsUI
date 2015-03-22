@@ -32,14 +32,21 @@ end
 
 
 local OnMouseDown = function(self)
-    TogglePVPUI()
-    if PVPUIFrame:IsVisible() then
+    if PVPUIFrame:IsVisible() and not ConquestFrame:IsVisible() then
         PVPQueueFrameCategoryButton2:Click()
+    elseif not PVPUIFrame:IsVisible() then
+        TogglePVPUI()
+        PVPQueueFrameCategoryButton2:Click()
+    else
+        TogglePVPUI()
     end
 end
 
 
 local Enable = function(self)
+    if not IsAddOnLoaded("Blizzard_PVPUI") then
+        LoadAddOn("Blizzard_PVPUI")
+    end
     self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
     self:RegisterEvent("PVPQUEUE_ANYWHERE_SHOW")
     self:RegisterEvent("ADDON_LOADED")

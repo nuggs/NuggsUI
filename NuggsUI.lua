@@ -52,7 +52,7 @@ function NuggsUI_Worker:COMBAT_LOG_EVENT_UNFILTERED(...)
 		end
 	end
 
-	if event == "SPELL_AURA_APPLIED" and isDestEnemy then --UnitIsEnemy("player", destName) then -- UnitIsPlayer(destGUID) and
+	if event == "SPELL_AURA_APPLIED" and isDestEnemy then
 		spellId, spellName, spellSchool = select(12,...);
 		if spellId == 42292 or spellId == 59752 then --if sourceGUID ~= destGUID then
 			SendChatMessage(">>>> TRINKET USED ".." ["..destName.."] <<<<", "SAY");
