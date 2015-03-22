@@ -10,6 +10,7 @@
 locales\en-US.lua
 Config\Config.lua
 Core\Functions.lua
+Core\CooldownList.lua
 Modules\ActionBars\Bar6.lua
 Modules\ActionBars\PetBar.lua
 Modules\Chat\Chat.lua
@@ -20,7 +21,9 @@ Modules\DataText\PvPQueue.lua
 Modules\Nameplates\Nameplates.lua
 Modules\Mail\OpenMail.lua
 Modules\Misc\Stagger.lua
-Modules\UnitFrames\Arena.lua
-Modules\UnitFrames\Raid.lua
-Modules\UnitFrames\Units.lua
+Modules\UnitFrames\Units\Arena.lua
+Modules\UnitFrames\Units\Player.lua
+Modules\UnitFrames\Units\Target.lua
+Modules\UnitFrames\Groups\Party.lua
+Modules\UnitFrames\Groups\Raid.lua
 NuggsUI.lua
