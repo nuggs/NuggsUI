@@ -1,3 +1,9 @@
+03/18/2015 - 03/23/2015 - TT
+ * Fixed PetBar placement according to xp/rep bar shown or not with chat background enabled
+ * Changed character/target/party portraits to be transparent over health
+ * Changed a lot of default values, perhaps we need a configuration GUI or something
+ * I don't remember what else, check the commits.
+ 
 03/17/2015 - TT
  * Removed a bunch of unused files
  * Cleaned up folder and file names
