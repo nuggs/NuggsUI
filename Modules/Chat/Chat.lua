@@ -9,7 +9,7 @@ local function StyleFrame(self, frame)
 	local FrameName = frame:GetName()
 	local TabText = _G[FrameName.."TabText"]
 
-	TabText:SetTextColor(0, .5, .7)
+	TabText:SetTextColor(1, 1, 1)
 	TabText.SetTextColor = Noop
 end
 hooksecurefunc(TukuiChat, "StyleFrame", StyleFrame)

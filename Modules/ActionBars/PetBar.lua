@@ -1,7 +1,10 @@
 T, C, L = Tukui:unpack()
+
 local TukuiActionBars = T["ActionBars"]
 local TukuiChat = T["Chat"]
 local Panels = T["Panels"]
+
+local PlayerLevel, MaxLevel = UnitLevel("Player"), MAX_PLAYER_LEVEL_TABLE[GetExpansionLevel()]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 
 hooksecurefunc(TukuiActionBars, "CreatePetBar", function()
@@ -39,7 +42,13 @@ hooksecurefunc(TukuiActionBars, "CreatePetBar", function()
 
         if (C.Chat.Background) then
             PetPanel:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
-            PetPanel:SetPoint("BOTTOM", Panels.RightChatBG, "TOP", 0, 16)
+
+            if GetWatchedFactionInfo() or PlayerLevel ~= MaxLevel then
+                PetPanel:SetPoint("BOTTOM", Panels.RightChatBG, "TOP", 0, 14)
+            else
+                PetPanel:SetPoint("BOTTOM", Panels.RightChatBG, "TOP", 0, 2)
+            end
+
             if (i == 1) then
                 Button:SetPoint("TOPLEFT", PetPanel, Spacing, -Spacing)
             else
@@ -57,6 +66,7 @@ hooksecurefunc(TukuiActionBars, "CreatePetBar", function()
 
 	RegisterStateDriver(Bar, "visibility", "[pet,nopetbattle,novehicleui,nooverridebar,nobonusbar:5] show; hide")
 
+    Bar:RegisterEvent("UPDATE_FACTION")
 	Bar:RegisterEvent("PLAYER_CONTROL_LOST")
 	Bar:RegisterEvent("PLAYER_CONTROL_GAINED")
 	Bar:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -69,8 +79,12 @@ hooksecurefunc(TukuiActionBars, "CreatePetBar", function()
 	Bar:RegisterEvent("UNIT_FLAGS")
 	Bar:RegisterEvent("UNIT_AURA")
 	Bar:SetScript("OnEvent", function(self, event, arg1)
-		if (event == "PLAYER_ENTERING_WORLD") then
-
+		if (event == "UPDATE_FACTION") then
+            if GetWatchedFactionInfo() or PlayerLevel ~= MaxLevel then
+                PetPanel:SetPoint("BOTTOM", Panels.RightChatBG, "TOP", 0, 14)
+            else
+                PetPanel:SetPoint("BOTTOM", Panels.RightChatBG, "TOP", 0, 2)
+            end
 		elseif (event == "PET_BAR_UPDATE")
 			or (event == "UNIT_PET" and arg1 == "player")
 			or (event == "PLAYER_CONTROL_LOST")

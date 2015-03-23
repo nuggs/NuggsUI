@@ -1,4 +1,5 @@
 local TukuiUnitFrames = T["UnitFrames"]
+local Class = select(2, UnitClass("player"))
 
 hooksecurefunc(TukuiUnitFrames, "Player", function(Player)
 	if C.UnitFrames.Portrait then
@@ -7,9 +8,14 @@ hooksecurefunc(TukuiUnitFrames, "Player", function(Player)
 		Player.Portrait:Size(250, 25)
 		Player.Portrait.Backdrop:SetBackdrop(nil)
 		Player.Portrait:SetAlpha(.3)
+        Player.Portrait:SetSequence(16);
 
 		Player.Health:ClearAllPoints()
 		Player.Health:SetPoint("TOPLEFT", 0, 0)
 		Player.Health:SetPoint("TOPRIGHT")
+
+        if Class == "DRUID" then
+            Player.DruidMana:Size(250, 8)
+        end
 	end
 end)

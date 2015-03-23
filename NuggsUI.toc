@@ -14,12 +14,14 @@ Core\CooldownList.lua
 Modules\ActionBars\Bar6.lua
 Modules\ActionBars\PetBar.lua
 Modules\Chat\Chat.lua
+Modules\DataText\Arena.lua
 Modules\DataText\Conquest.lua
 Modules\DataText\Honor.lua
 Modules\DataText\nGarrison.lua
 Modules\DataText\PvPQueue.lua
 Modules\Nameplates\Nameplates.lua
 Modules\Mail\OpenMail.lua
+Modules\Misc\ExperienceBar.lua
 Modules\Misc\Stagger.lua
 Modules\UnitFrames\Units\Arena.lua
 Modules\UnitFrames\Units\Player.lua
