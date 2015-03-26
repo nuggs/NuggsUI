@@ -71,3 +71,4 @@ hooksecurefunc(Tooltip, "CreateAnchor", function()
 	Tooltip.Anchor:SetPoint("BOTTOMRIGHT", RightChatBG, -5, 125)
 end)
 ]]--
+-- n,_,_,c,_,_,_,_,_,_,_,_,_,v1,v2,v3=UnitDebuff("Player", "Dampening");print(n..":".." "..c.." ".." "..v1.." "..v2.." "..v3)
