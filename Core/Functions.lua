@@ -14,3 +14,13 @@ function NuggsUI_IsPvP()
 	end
 	return nil;
 end
+
+-- remove and change ispvp temp for now
+function NuggsUI_IsArena()
+	SetMapToCurrentZone();
+	_, instance = IsInInstance();
+	if (instance == "arena") then
+		return 1;
+	end
+	return nil;
+end

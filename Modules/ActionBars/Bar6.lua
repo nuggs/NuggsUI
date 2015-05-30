@@ -101,7 +101,7 @@ local function NuggsUI_SetupExtraBar()
 	A8.Backdrop:Show();
 
     for id=13, 24 do
-        local Button = CreateFrame("CheckButton", "ExtraBarButton"..(id-12), UIParent, "ActionBarButtonTemplate");
+        local Button = CreateFrame("CheckButton", "ExtraBarButton"..(id-12), A8, "ActionBarButtonTemplate");
         local PreviousButton = _G["ExtraBarButton"..(id-13)];
 
         Button:SetSize(Size, Size);

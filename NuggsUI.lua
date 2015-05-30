@@ -2,11 +2,17 @@ local T, C, L = Tukui:unpack()
 
 -- Move this stuff to proper files, Could probably go in a PvP module or something.
 -- Maybe not.  shaman addon, you cannot outrun the wind, blablblblbl when windfury procs
-
+--[[  ]]
+--local n, _, _, _, _, _, _, m, hwl, cwa, u = GetCurrencyListInfo(390) print(n.." "..m.." "..cwa)
+--/run local n, a, _, tw, w, t = GetCurrencyInfo(390) print(n.." "..a.." "..tw.." "..w.." "..t)
 -- Some basic things I want from my UI.
+
+local zoneName;
 local NuggsUI_Worker = CreateFrame("Frame");
 
 function NuggsUI_Worker:PLAYER_LOGIN()
+    SetMapToCurrentZone();
+    zoneName = GetZoneText();
 	NuggsUI_Worker:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
 	NuggsUI_Worker:UnregisterEvent("PLAYER_LOGIN");
     if (IsAddOnLoaded("Tukui_Datatext")) then
@@ -18,6 +24,36 @@ end
 
 -- Change some settings when entering BGs or arenas
 function NuggsUI_Worker:PLAYER_ENTERING_WORLD(...)
+    --[[if NuggsUI_IsPvP() then
+        local mlook = CreateFrame("button","mlook")
+        mlook:RegisterForClicks("AnyDown","AnyUp")
+        mlook:SetScript("OnClick",function(s,b,d)
+            if d then
+                MouselookStart()
+            else
+                MouselookStop()
+            end
+        end)
+        SecureStateDriverManager:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
+        local mov = CreateFrame("frame",nil,nil,"SecureHandlerStateTemplate")
+        RegisterStateDriver(mov,"mov","[@mouseover,exists]1;0")
+        mov:SetAttribute("_onstate-mov","if newstate==1 then self:SetBindingClick(1,'BUTTON2','mlook')else self:ClearBindings()end")
+    else
+        local mlook = CreateFrame("button", "mlook")
+        mlook:RegisterForClicks("AnyDown", "AnyUp")
+        mlook:SetScript("OnClick", function(s ,b, d)
+            if d then
+                MouselookStart()
+            else
+                MouselookStop()
+            end
+        end)
+        SecureStateDriverManager:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
+        local mov = CreateFrame("frame", nil, nil, "SecureHandlerStateTemplate")
+        RegisterStateDriver(mov, "mov", "[@mouseover,exists]1;1")
+        mov:SetAttribute("type", "click")
+    end]]
+
 	if (NuggsUI_IsPvP() == 1) then
         if (ObjectiveTrackerFrame:IsVisible() or ObjectiveTrackerFrame:IsShown()) then
             ObjectiveTrackerFrame:Hide();
@@ -52,7 +88,7 @@ function NuggsUI_Worker:COMBAT_LOG_EVENT_UNFILTERED(...)
 		end
 	end
 
-	if event == "SPELL_AURA_APPLIED" and isDestEnemy then
+	if event == "SPELL_AURA_APPLIED" and isDestEnemy and zoneName ~= "Ashran" then
 		spellId, spellName, spellSchool = select(12,...);
 		if spellId == 42292 or spellId == 59752 then --if sourceGUID ~= destGUID then
 			SendChatMessage(">>>> TRINKET USED ".." ["..destName.."] <<<<", "SAY");
@@ -63,6 +99,7 @@ end
 NuggsUI_Worker:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end);
 NuggsUI_Worker:RegisterEvent("PLAYER_LOGIN");
 NuggsUI_Worker:RegisterEvent("PLAYER_ENTERING_WORLD");
+
 
 --[[ Implement later, mayhaps
 local Tooltip = T["Tooltips"]

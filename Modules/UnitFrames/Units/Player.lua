@@ -16,6 +16,7 @@ hooksecurefunc(TukuiUnitFrames, "Player", function(Player)
 
         if Class == "DRUID" then
             Player.DruidMana:Size(250, 8)
+            Player.DruidMana:SetAlpha(.3)
         end
 	end
 end)
