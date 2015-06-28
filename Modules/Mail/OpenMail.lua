@@ -11,7 +11,7 @@ local L_MAIL_COMPLETE = L.mail_COMPLETE
 local L_MAIL_NEED = L.mail_NEED
 local L_MAIL_MESSAGES = L.mail_MESSAGES
 local deletedelay, t = 0.5, 0
-local takingOnlyCash = false
+local takingOnlyCash, returned_cash = false, nil
 local button, button2, waitForMail, openAll, openAllCash, openMail, lastopened, stopOpening, onEvent, needsToWait, copper_to_pretty_money, total_cash
 local _G = _G
 local baseInboxFrame_OnClick
@@ -37,6 +37,12 @@ function openAll()
 end
 
 function openAllCash()
+	if not returned_cash then
+		returned_cash = 0
+		for index = 0, GetInboxNumItems() do
+			returned_cash = returned_cash + select(5, GetInboxHeaderInfo(index))
+		end
+	end
 	takingOnlyCash = true
 	openAll()
 end
@@ -44,7 +50,14 @@ end
 function openMail(index)
     local total_amount
 	if not InboxFrame:IsVisible() then return stopOpening("|cffffff00"..L_MAIL_NEED) end
-	if index == 0 then MiniMapMailFrame:Hide() stopOpening("|cffffff00"..L_MAIL_COMPLETE) return end
+	if index == 0 then
+        MiniMapMailFrame:Hide() 
+        if (not takingOnlyCash) then
+            stopOpening("|cffffff00"..L_MAIL_COMPLETE)
+        else
+            stopOpening("|cffffff00"..L_MAIL_COMPLETE.." collecting |r"..copper_to_pretty_money(returned_cash))
+        end
+    return end
 	local _, _, _, _, money, COD, _, numItems = GetInboxHeaderInfo(index)
 	if money > 0 then
 		TakeInboxMoney(index)
@@ -61,8 +74,11 @@ function openMail(index)
 		t = 0
 		button:SetScript("OnUpdate", waitForMail)
 	else
-        if (not takingOnlyCash) then stopOpening("|cffffff00"..L_MAIL_COMPLETE)
-        else stopOpening("|cffffff00"..L_MAIL_COMPLETE.." collecting "..copper_to_pretty_money(total_amount)) end
+        if (not takingOnlyCash) then
+            stopOpening("|cffffff00"..L_MAIL_COMPLETE)
+        else
+            stopOpening("|cffffff00"..L_MAIL_COMPLETE.." collecting |r"..copper_to_pretty_money(returned_cash))
+        end
 		MiniMapMailFrame:Hide()
         -- May have to re-implement border color changing when having mail
 		-- TukuiMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
